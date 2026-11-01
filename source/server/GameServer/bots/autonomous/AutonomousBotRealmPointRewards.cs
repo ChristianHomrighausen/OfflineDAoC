@@ -82,11 +82,13 @@ public static class AutonomousBotRealmPointRewards
         long now = GameLoop.GameLoopTime;
         long previousDeath = killedBot.TempProperties.GetProperty<long>(
             LastRealmPointDeathTickProperty, -1);
-        long worthInterval = Math.Max(0, Properties.RP_WORTH_SECONDS) * 1000L;
-        bool isWorthRealmPoints = previousDeath < 0 || now - previousDeath >= worthInterval;
+        // Gamebots have their own repeat-kill window (bot_rp_worth_seconds, default 0 = always
+        // worth realm points); real players keep rp_worth_seconds.
+        long worthInterval = Math.Max(0, Properties.BOT_RP_WORTH_SECONDS) * 1000L;
+        bool isWorthRealmPoints = worthInterval == 0 || previousDeath < 0 || now - previousDeath >= worthInterval;
 
-        // Every death resets the same repeat-kill window used for a real player,
-        // including a death caused by an NPC or by somebody who receives no RP.
+        // Every death resets the repeat-kill window, including a death caused by an
+        // NPC or by somebody who receives no RP.
         killedBot.TempProperties.SetProperty(LastRealmPointDeathTickProperty, now);
 
         KeyValuePair<GameLiving, double>[] rawContributors;

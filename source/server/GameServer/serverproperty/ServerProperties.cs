@@ -846,6 +846,12 @@ namespace DOL.GS.ServerProperties
 		public static int RP_WORTH_SECONDS;
 
 		/// <summary>
+		/// The time until an autonomous gamebot is worth rps again after death (0 = always worth rps)
+		/// </summary>
+		[ServerProperty("rates", "bot_rp_worth_seconds", "Bot Realm Points Worth Seconds - how many seconds until an autonomous gamebot is worth RPs again after being killed (0 = no cooldown)", 0)]
+		public static int BOT_RP_WORTH_SECONDS;
+
+		/// <summary>
 		/// Health Regen Rate
 		/// </summary>
 		[ServerProperty("rates", "health_regen_amount_modifier", "Health regen amount modifier", 1.0)]
