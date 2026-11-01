@@ -109,7 +109,10 @@ namespace DOL.GS.PacketHandler
 
 							pak.WriteShort((ushort)spin); // special index for spellline
 							pak.WriteByte(0); // bonus
-							pak.WriteShort(spell.InternalIconID > 0 ? spell.InternalIconID : spell.Icon); // icon
+							// a song's icon goes through the client's spells.csv, as on the effects bar (SongIconClientMap)
+							pak.WriteShort(spin == 0xFF && ServerProperties.Properties.SONG_ICON_CLIENT_MAP
+								? SongIconClientMap.IconForSong(spell.Icon)
+								: spell.InternalIconID > 0 ? spell.InternalIconID : spell.Icon); // icon
 							pak.WritePascalString(spell.Name);
 						}
 						else if (skill is Style)

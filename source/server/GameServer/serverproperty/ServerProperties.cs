@@ -594,6 +594,12 @@ namespace DOL.GS.ServerProperties
 		public static bool USE_NEW_TOOLTIP_FORCEDUPDATE;
 
 		/// <summary>
+		/// Song icons on the original client's skill list and quickbar go through the client's spells.csv (SongIconClientMap).
+		/// </summary>
+		[ServerProperty("server", "song_icon_client_map", "Translate song icons in the skill list through the original client's spell table, so minstrel and bard songs show their own icons. Turn off for the new client, which translates them itself.", true)]
+		public static bool SONG_ICON_CLIENT_MAP;
+
+		/// <summary>
 		/// Property to enable crush/slash/thrust determining damage variance for polearms and 2H weapons
 		/// </summary>
 		[ServerProperty("server", "enable_albion_advanced_weapon_spec", "Set to true to determine damage variance for polearms and 2H weapons on 1H crush/slash/thrust spec.", true)]
