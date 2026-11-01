@@ -54,7 +54,7 @@ QUEST_RESPAWN_SECONDS = 300
 EXCLUDED_DIRS = {"logs", "backups", "dxvk-staging", "deployment-backups", "keep-relic-reset-backups", "progress-backups",
                  "screenshots", ".git", "testresults", "dumps"}
 EXCLUDED_NAMES = {"account.txt", "rvr-world.json", "bot-goals.json", "bot-world.json", "bot-world.request", "bot-ai-delay.json",
-                  "realm-events.request.json", "realm-events.result.json", "realm-event-records.sqlite3",
+                  "bot-levelcaps.json", "realm-events.request.json", "realm-events.result.json", "realm-event-records.sqlite3",
                   "realm-event-records.sqlite3-wal", "realm-event-records.sqlite3-shm", "errorlog.txt",
                   "debug.log", "chat.log", "user.dat", "unins000.exe", "unins000.dat", "uninstdaoc.exe",
                   # DXVK stays in the developer's own install only (owner 2026-10-14)

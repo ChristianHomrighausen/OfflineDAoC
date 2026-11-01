@@ -1725,7 +1725,9 @@ namespace DOL.GS
         {
             if (!IsAutonomousWorldBot || arguments == null || arguments.ExpTotal <= 0)
                 return;
-            if (Level >= MaxLevel)
+            // A personal cap from bot-levelcaps.json (/botlevelcap) works like the level-50 cap.
+            byte levelLimit = BotLevelCapStore.LevelLimitFor(DatabaseID, Level, MaxLevel);
+            if (Level >= levelLimit)
             {
                 // The cap discards the experience, but a kill that earned it is still proof the bot is working: a
                 // level-50 caster or pet class farming from one spot was "rescued" to its capital every fifteen
@@ -1765,12 +1767,17 @@ namespace DOL.GS
             Experience += experienceGained;
             AutonomousStuckWatchdog.MarkProgress(this, eAutonomousProgressKind.Experience);
             bool leveled = false;
-            while (Level < MaxLevel && Experience >= GamePlayer.GetExperienceAmountForLevel(Level))
+            while (Level < levelLimit && Experience >= GamePlayer.GetExperienceAmountForLevel(Level))
             {
                 Level++;
                 ApplyLevelStatGrowth(Level);
                 leveled = true;
             }
+
+            // Reaching a personal cap keeps no experience beyond it, so lifting the cap later
+            // does not hand out several levels at once.
+            if (levelLimit < MaxLevel && Level >= levelLimit)
+                Experience = Math.Min(Experience, GamePlayer.GetExperienceAmountForLevel(Level) - 1);
 
             if (leveled)
             {

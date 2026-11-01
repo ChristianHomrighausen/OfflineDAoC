@@ -288,6 +288,8 @@ namespace DOL.GS
 			try
 			{
 				AutonomousBotGoalPolicy.Initialize(Configuration.RootDirectory);
+				// Never throws: an unreadable file pauses gamebot experience instead of stopping the server.
+				BotLevelCapStore.Initialize(Configuration.RootDirectory);
 				//Manually set ThreadPool min thread count.
 				ThreadPool.GetMinThreads(out int minWorkerThreads, out int minIOCThreads);
 				ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxIOCThreads);
