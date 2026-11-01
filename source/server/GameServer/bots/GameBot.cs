@@ -1706,6 +1706,14 @@ namespace DOL.GS
             if (!IsAutonomousWorldBot || amount <= 0)
                 return;
             AutonomousRealmPoints += amount;
+            // A gamebot in a guild pays its realm points into the guild's account, as a player does
+            // (saved with the guilds by GuildMgr.SaveAllGuilds). Bots tick in parallel, hence the lock.
+            Guild guild = AutonomousBotGuilds.GuildOf(DatabaseID);
+            if (guild != null)
+            {
+                lock (guild)
+                    guild.RealmPoints += amount;
+            }
             RealmLevel = Math.Max(RealmLevel, AutonomousBotRealmPointRewards.RealmLevelFor(AutonomousRealmPoints));
             AutonomousStuckWatchdog.MarkProgress(this, eAutonomousProgressKind.RealmPoints);
             MarkAutonomousStateDirty();

@@ -16,8 +16,9 @@ namespace DOL.GS
     /// in the guild list and social window, carries the guild name under its name (own realm only, enemies keep seeing
     /// its realm rank title), wears the guild emblem on cloak and shield (everyone sees the emblem), and talks in guild
     /// chat. /spawn companions never join: they only show their owner's guild name and emblem while with the owner.
-    /// Membership is kept here, not on the bot's IGamePlayer Guild, so guild realm points, merit, keep claims and guild
-    /// buffs never see a bot. A bot removed from the launcher's roster leaves its guild.
+    /// Membership is kept here, not on the bot's IGamePlayer Guild, so merit, keep claims and guild buffs never see a
+    /// bot. The realm points a gamebot earns are paid into its guild's account (GameBot.GainRealmPoints). A bot removed
+    /// from the launcher's roster leaves its guild.
     /// </summary>
     public static class AutonomousBotGuilds
     {
